@@ -1,56 +1,56 @@
 {
   "compilerOptions": {
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    
-    "baseUrl": ".",
-    "esModuleInterop": true,
+    /* Base/Module Options */
     "target": "ES2022",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2022"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "jsx": "preserve",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": true,
     "resolveJsonModule": true,
-    "sourceMap": true,
     "isolatedModules": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+
+    /* Strictness */
+    "strict": true,
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "strictNullChecks": true,
+    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Output Behavior */
+    "noEmit": true,
+    "incremental": true,
+    "sourceMap": true,
+
+    /* Paths */
+    "baseUrl": ".",
     "paths": {
-      "@payload-config": [
-        "./src/payload.config.ts"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
-    }
+      "~/*": ["./src/*"],
+      "@/*": ["./src/*"],
+      "@payload-config": ["./src/payload.config.ts"],
+      "react": ["./node_modules/@types/react"]
+    },
+
+    /* Plugins */
+    "plugins": [
+      { "name": "next" }
+    ]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.js",
+    "**/*.cjs",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
     "redirects.js",
     "next.config.js",
     "next-sitemap.config.cjs"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
