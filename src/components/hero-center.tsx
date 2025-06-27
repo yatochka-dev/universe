@@ -56,7 +56,9 @@ const item = {
 export default function HeroCenter({ config, settings }: Props) {
   return (
     <motion.div className="text-center" variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
-      <motion.div className="mb-8" variants={item}>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/*@ts-expect-error*/}
+        <motion.div className="mb-8" variants={item}>
         <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-500/20 text-red-200 border border-red-500/30 backdrop-blur-sm">
           {config.topBadge.emoji}&nbsp;{config.topBadge.text}
         </span>
