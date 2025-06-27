@@ -1,56 +1,43 @@
 {
   "compilerOptions": {
-    /* Base/Module Options */
-    "target": "ES2022",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "jsx": "preserve",
+    /* Base Options: */
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
     "allowJs": true,
-    "checkJs": true,
     "resolveJsonModule": true,
+    "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
 
     /* Strictness */
     "strict": true,
-    "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "strictNullChecks": true,
-    "noImplicitOverride": true,
-    "forceConsistentCasingInFileNames": true,
+    "checkJs": true,
 
-    /* Output Behavior */
+    /* Bundled projects */
+    "lib": ["dom", "dom.iterable", "ES2022"],
     "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
     "incremental": true,
-    "sourceMap": true,
 
-    /* Paths */
+    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
-      "@/*": ["./src/*"],
-      "@payload-config": ["./src/payload.config.ts"],
-      "react": ["./node_modules/@types/react"]
-    },
-
-    /* Plugins */
-    "plugins": [
-      { "name": "next" }
-    ]
+      "@payload-config": ["./src/payload.config.ts"]
+    }
   },
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
     "**/*.cjs",
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "redirects.js",
-    "next.config.js",
-    "next-sitemap.config.cjs"
+    "**/*.js",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
