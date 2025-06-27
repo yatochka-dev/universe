@@ -7,7 +7,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    // NODE_ENV: z.enum(["development", "test", "production"]),
     DATABASE_URL: z.string().url(),
     SUDO_USERS: z.string().transform((v) => {
       const dt = JSON.parse(v);
@@ -30,7 +30,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV,
+    // NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
     SUDO_USERS: process.env.SUDO_USERS,
 

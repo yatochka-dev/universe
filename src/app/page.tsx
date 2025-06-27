@@ -1,9 +1,18 @@
+import payload from "~/data-access";
+import {RefreshRouteOnSave} from "~/app/rors";
+import Hero from "~/components/hero-section";
 
-export default function HomePage() {
-  return (
+export default async function HomePage() {
+    const p = await payload()
+    const config = await p.findGlobal({
+        slug: "hero-section",
+        draft: true,
+
+    })
+    return (
     <>
-
-      <main className={'flex justify-center items-center h-screen'}>Yup, nothing here... YET!!!</main>
+        <RefreshRouteOnSave/>
+        <Hero/>
     </>
   );
 }

@@ -4,18 +4,25 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { buildConfig } from "payload";
 import { env } from "~/env";
 import { Users } from "~/collections/User";
+import {GHeroSection} from "~/globals/hero";
+import {GSettings} from "~/globals/settings";
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
   editor: lexicalEditor(),
   admin: {
     user: Users.slug,
+    livePreview: {
+      url: "http://localhost:3000",
+      globals: ["hero-section"]
+    }
   },
   // Define and configure your collections in this array
   collections: [Users],
+  globals: [GSettings, GHeroSection],
 
   // Your Payload secret - should be a complex and secure string, unguessable
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET ?? "",
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: postgresAdapter({
