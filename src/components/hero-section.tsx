@@ -1,7 +1,7 @@
 import { Button } from "~/components/ui/button"
 import { ArrowRight, Play } from "lucide-react"
 import { DiagonalDivider } from "./diagonal-divider"
-import getHeroSection from "~/data-access/hero";
+import getHeroSection, {getHeroSectionDraft} from "~/data-access/hero";
 import React from "react";
 import {cn} from "~/lib/utils";
 import getSettings from "~/data-access/settings";
@@ -33,8 +33,10 @@ function convertTextToJSX(text: string, customClass: string): React.ReactElement
     );
 }
 
-export default async function Hero() {
-    const config = await getHeroSection()
+export default async function Hero({
+    d
+                                   }: {d: boolean}) {
+    const config = d ? await getHeroSectionDraft() : await getHeroSection();
     const settings = await getSettings()
 
     return (

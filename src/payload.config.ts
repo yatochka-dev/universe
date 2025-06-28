@@ -13,7 +13,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     livePreview: {
-      url: "http://localhost:3000",
+      url: "http://localhost:3000/lp",
       globals: ["hero-section"]
     }
   },

@@ -1,5 +1,6 @@
 /* <<<<<<<<<<<<<<  ✨ Windsurf Command ⭐ >>>>>>>>>>>>>>>> */
 import type {GlobalConfig} from "payload";
+import {revalidateTag} from "next/cache";
 
 const asterixValidator = (value: unknown) => {
     const val = value as string
@@ -16,7 +17,11 @@ export const GHeroSection: GlobalConfig = {
     slug: "hero-section",
     admin: {
     },
-
+    hooks: {afterChange: [
+    args => {
+    revalidateTag("hero-section")
+    }
+    ]},
     versions: {
 
       drafts: {

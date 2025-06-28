@@ -6,6 +6,11 @@ import "./src/env.js";
 import { withPayload } from "@payloadcms/next/withPayload";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    experimental: {
+        useCache: true,
+        dynamicIO: true,
+    }
+};
 
 export default withPayload(config);
