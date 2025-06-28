@@ -1,9 +1,8 @@
 "use cache"
-import {RefreshRouteOnSave} from "~/app/rors";
 import Hero from "~/components/hero-section";
 import {unstable_cacheLife} from "next/cache";
 
-export default async function HomePage() {
+export default function HomePage() {
     unstable_cacheLife("days")
     return (
     <>

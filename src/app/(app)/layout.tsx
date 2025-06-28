@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Providers } from "~/app/providers";
+import { Providers } from "~/app/(app)/providers";
 
 export const metadata: Metadata = {
   title: "MindBridge",
