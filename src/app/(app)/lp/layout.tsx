@@ -1,4 +1,4 @@
-import {RefreshRouteOnSave} from "~/app/rors";
+import {RefreshRouteOnSave} from "~/app/(app)/rors";
 import {Suspense} from "react";
 
 export default function LivePreviewLayout({

@@ -1,4 +1,3 @@
-import {RefreshRouteOnSave} from "~/app/rors";
 import Hero from "~/components/hero-section";
 
 export default async function HomePage() {
