@@ -24,7 +24,9 @@ const serverFunction: ServerFunctionClient = async function (args) {
 
 const Layout = ({ children }: Args) => (
   <>
-    <Suspense>
+    {/*@TODO replace with loading spinner or smth*/}
+
+    <Suspense fallback={"Loading the admin panel..."} >
       <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
         {children}
       </RootLayout>
