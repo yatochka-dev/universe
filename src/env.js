@@ -41,7 +41,7 @@ export const env = createEnv({
     SUDO_USERS: process.env.SUDO_USERS,
 
     NEXT_PUBLIC_BACKEND_URI: process.env.NEXT_PUBLIC_BACKEND_URI,
-    NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.VERCEL_BRANCH_URL,
+    NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.VERCEL_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
