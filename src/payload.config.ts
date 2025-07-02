@@ -2,10 +2,10 @@ import sharp from "sharp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { buildConfig } from "payload";
-import { env } from "~/env";
 import { Users } from "~/collections/User";
-import {GHeroSection} from "~/globals/hero";
-import {GSettings} from "~/globals/settings";
+import { GHeroSection } from "~/globals/hero";
+import { GSettings } from "~/globals/settings";
+import { env } from "./env";
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -13,9 +13,9 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     livePreview: {
-      url: "http://localhost:3000/lp",
-      globals: ["hero-section"]
-    }
+      url: `${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/lp/`,
+      globals: ["hero-section"],
+    },
   },
   // Define and configure your collections in this array
   collections: [Users],
