@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "~/app/(app)/providers";
+import {Suspense} from "react";
 
 export const metadata: Metadata = {
   title: "MindBridge",
@@ -17,10 +18,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
+
+      <Suspense>
+
+          <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
+          <body>
+          <Providers>{children}</Providers>
+          </body>
+          </html>
+      </Suspense>
   );
 }

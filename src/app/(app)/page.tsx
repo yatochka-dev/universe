@@ -2,7 +2,7 @@
 import Hero from "~/components/hero-section";
 import {unstable_cacheLife} from "next/cache";
 
-export default function HomePage() {
+export default async function HomePage() {
     unstable_cacheLife("days")
     return (
     <>
