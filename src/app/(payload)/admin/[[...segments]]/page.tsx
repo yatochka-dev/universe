@@ -19,4 +19,11 @@ export const generateMetadata = ({ params, searchParams }: Args): Promise<Metada
 const Page = ({ params, searchParams }: Args) =>
   RootPage({ config, params, searchParams, importMap })
 
+
+export const generateStaticParams = async () => {
+  return [
+    { segments: ["login"] },
+  ]
+}
+
 export default Page
