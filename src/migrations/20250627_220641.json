@@ -272,12 +272,8 @@
           "name": "payload_jobs_log_parent_id_fk",
           "tableFrom": "payload_jobs_log",
           "tableTo": "payload_jobs",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -724,12 +720,8 @@
           "name": "payload_locked_documents_rels_parent_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "payload_locked_documents",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -737,12 +729,8 @@
           "name": "payload_locked_documents_rels_users_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -750,12 +738,8 @@
           "name": "payload_locked_documents_rels_payload_jobs_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "payload_jobs",
-          "columnsFrom": [
-            "payload_jobs_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["payload_jobs_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -959,12 +943,8 @@
           "name": "payload_preferences_rels_parent_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "payload_preferences",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -972,12 +952,8 @@
           "name": "payload_preferences_rels_users_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1182,12 +1158,8 @@
           "name": "hero_section_stats_parent_id_fk",
           "tableFrom": "hero_section_stats",
           "tableTo": "hero_section",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1395,12 +1367,8 @@
           "name": "_hero_section_v_version_stats_parent_id_fk",
           "tableFrom": "_hero_section_v_version_stats",
           "tableTo": "_hero_section_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1612,42 +1580,27 @@
     "public.enum_payload_jobs_log_task_slug": {
       "name": "enum_payload_jobs_log_task_slug",
       "schema": "public",
-      "values": [
-        "inline",
-        "schedulePublish"
-      ]
+      "values": ["inline", "schedulePublish"]
     },
     "public.enum_payload_jobs_log_state": {
       "name": "enum_payload_jobs_log_state",
       "schema": "public",
-      "values": [
-        "failed",
-        "succeeded"
-      ]
+      "values": ["failed", "succeeded"]
     },
     "public.enum_payload_jobs_task_slug": {
       "name": "enum_payload_jobs_task_slug",
       "schema": "public",
-      "values": [
-        "inline",
-        "schedulePublish"
-      ]
+      "values": ["inline", "schedulePublish"]
     },
     "public.enum_hero_section_status": {
       "name": "enum_hero_section_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__hero_section_v_version_status": {
       "name": "enum__hero_section_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     }
   },
   "schemas": {},

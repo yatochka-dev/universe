@@ -7,13 +7,12 @@ export const Users: CollectionConfig = {
   slug: "users",
   admin: {
     useAsTitle: "username",
-  
   },
   access: {
-    admin: ({req}) => {
-      if (!req.user?.isAdmin) return isSudo({req})  as boolean
-      return req?.user?.isAdmin as boolean
-    }
+    admin: ({ req }) => {
+      if (!req.user?.isAdmin) return isSudo({ req }) as boolean;
+      return req?.user?.isAdmin as boolean;
+    },
   },
   auth: true,
   fields: [

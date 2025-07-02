@@ -1,12 +1,11 @@
-"use cache"
 import Hero from "~/components/hero-section";
-import {unstable_cacheLife} from "next/cache";
+import { cookies } from "next/headers";
 
 export default async function HomePage() {
-    unstable_cacheLife("days")
-    return (
+  await cookies();
+  return (
     <>
-        <Hero d={false}/>
+      <Hero d={false} />
     </>
   );
 }

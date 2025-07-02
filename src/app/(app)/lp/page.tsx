@@ -1,9 +1,11 @@
 import Hero from "~/components/hero-section";
+import { cookies } from "next/headers";
 
 export default async function HomePage() {
-    return (
+  await cookies();
+  return (
     <>
-        <Hero d={true}/>
+      <Hero d={true} />
     </>
   );
 }
