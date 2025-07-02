@@ -10,7 +10,7 @@ export const RefreshRouteOnSave: React.FC = () => {
   return (
     <PayloadLivePreview
       refresh={() => router.refresh()}
-      serverURL={env.NEXT_PUBLIC_BACKEND_URI}
+      serverURL={env.NEXT_PUBLIC_VERCEL_BRANCH_URL}
     />
   );
 };
