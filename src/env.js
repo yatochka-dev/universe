@@ -23,6 +23,12 @@ export const env = createEnv({
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
     NEXT_PUBLIC_BACKEND_URI: z.string().url(),
+    NEXT_PUBLIC_VERCEL_BRANCH_URL: z
+      .string()
+      .transform((v) => {
+        return "https://" + v;
+      })
+      .default("http://localhost:3000"),
   },
 
   /**
@@ -35,6 +41,7 @@ export const env = createEnv({
     SUDO_USERS: process.env.SUDO_USERS,
 
     NEXT_PUBLIC_BACKEND_URI: process.env.NEXT_PUBLIC_BACKEND_URI,
+    NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.VERCEL_BRANCH_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
