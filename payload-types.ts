@@ -87,12 +87,10 @@ export interface Config {
   globals: {
     settings: Setting;
     'hero-section': HeroSection;
-    example: Example;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
     'hero-section': HeroSectionSelect<false> | HeroSectionSelect<true>;
-    example: ExampleSelect<false> | ExampleSelect<true>;
   };
   locale: null;
   user: User & {
@@ -428,16 +426,6 @@ export interface HeroSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "example".
- */
-export interface Example {
-  id: number;
-  example?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -480,16 +468,6 @@ export interface HeroSectionSelect<T extends boolean = true> {
         id?: T;
       };
   _status?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "example_select".
- */
-export interface ExampleSelect<T extends boolean = true> {
-  example?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
