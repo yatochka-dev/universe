@@ -74,7 +74,7 @@ export const GHeroSection: GlobalConfig = {
           required: true,
           admin: {
             description:
-              "surround the work you want highlighted in red with **",
+              "surround the word you want highlighted in red with **",
           },
           validate: asterixValidator,
           defaultValue: "Your *Launchpad* to Innovation",
@@ -88,7 +88,7 @@ export const GHeroSection: GlobalConfig = {
             "Empowering the next generation of builders, thinkers, and leaders through *hands-on learning* and *global collaboration*",
           admin: {
             description:
-              "surround the work you want highlighted in red with **",
+              "surround the word you want highlighted in red with **",
           },
         },
       ],
