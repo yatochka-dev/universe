@@ -4,4 +4,4 @@ export interface ActionMetadata {
   actionName: string;
 }
 
-export const action = createSafeActionClient<ActionMetadata>();
+export const action = createSafeActionClient();
