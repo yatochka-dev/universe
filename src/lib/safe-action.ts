@@ -1,3 +1,7 @@
 import { createSafeActionClient } from "next-safe-action";
 
-export const action = createSafeActionClient();
+export interface ActionMetadata {
+  actionName: string;
+}
+
+export const action = createSafeActionClient<ActionMetadata>();
