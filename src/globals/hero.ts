@@ -1,21 +1,7 @@
 /* <<<<<<<<<<<<<<  ✨ Windsurf Command ⭐ >>>>>>>>>>>>>>>> */
 import type { GlobalConfig } from "payload";
 import { revalidateTag } from "next/cache";
-
-const asterixValidator = (value: unknown) => {
-  const val = value as string;
-  let counter = 0;
-  for (const char of val) {
-    if (char === "*") {
-      counter++;
-    }
-  }
-
-  if (counter % 2 !== 0) {
-    return "Number of * should be even";
-  }
-  return true;
-};
+import { asterixValidator } from "../lib/asterixValidator";
 
 export const GHeroSection: GlobalConfig = {
   slug: "hero-section",
