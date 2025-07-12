@@ -49,15 +49,16 @@ export const Users: CollectionConfig = {
         position: "sidebar",
       },
       validate: (value: unknown) => {
-        console.log(value);
-        // only lowecase letter, _, - and numbers
-        const schema = z.string();
+        const schema = z
+          .string()
+          .min(3)
+          .max(50)
+          .regex(/^[a-z0-9_-]+$/);
 
-        const { success, error } = schema.safeParse(JSON.stringify(value));
-        console.log(success);
+        const result = schema.safeParse(value);
 
-        if (!success) {
-          return error?.issues[0]?.message ?? "Invalid username";
+        if (!result.success) {
+          return result.error.issues[0]?.message ?? "Invalid username";
         }
 
         return true;
