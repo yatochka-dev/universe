@@ -3,6 +3,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { buildConfig } from "payload";
 import { Users } from "~/collections/User";
+import { Contacts } from "~/collections/Contact";
 import { GHeroSection } from "~/globals/hero";
 import { GSettings } from "~/globals/settings";
 import { env } from "./env";
@@ -18,7 +19,7 @@ export default buildConfig({
     },
   },
   // Define and configure your collections in this array
-  collections: [Users],
+  collections: [Users, Contacts],
   globals: [GSettings, GHeroSection],
 
   // Your Payload secret - should be a complex and secure string, unguessable
