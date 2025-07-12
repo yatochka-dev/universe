@@ -1,11 +1,5 @@
-import type { CollectionConfig, AfterChangeHook } from "payload/types";
+import type { CollectionConfig } from "payload";
 import sendDiscordWebhook from "~/lib/discordWebhook";
-
-const notifyDiscord: AfterChangeHook = async ({ doc, operation }) => {
-  if (operation === "create") {
-    await sendDiscordWebhook(doc);
-  }
-};
 
 export const Contacts: CollectionConfig = {
   slug: "contacts",
@@ -30,7 +24,19 @@ export const Contacts: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [notifyDiscord],
+    afterChange: [
+      async ({ doc, operation }) => {
+        if (operation === "create") {
+          await sendDiscordWebhook(
+            doc as {
+              name: string;
+              email: string;
+              message: string;
+            },
+          );
+        }
+      },
+    ],
   },
 };
 
