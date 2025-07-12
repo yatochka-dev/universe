@@ -1,7 +1,7 @@
 /* <<<<<<<<<<<<<<  ✨ Windsurf Command ⭐ >>>>>>>>>>>>>>>> */
 import type { GlobalConfig } from "payload";
 import { revalidateTag } from "next/cache";
-import { asterixValidator } from "~lib/asterixValidator";
+import { asterixValidator } from "../lib/asterixValidator";
 
 export const GHeroSection: GlobalConfig = {
   slug: "hero-section",
