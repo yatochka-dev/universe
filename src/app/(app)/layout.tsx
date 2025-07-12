@@ -7,6 +7,9 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "MindBridge",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 const geist = Geist({
