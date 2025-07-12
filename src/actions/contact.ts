@@ -11,7 +11,7 @@ const schema = z.object({
 });
 
 export const submitContact = action
-  .metadata({ actionName: "submitContact" })
+  .metadata()
   .inputSchema(schema)
   .action(async ({ parsedInput }) => {
     const payload = await payloadClient();
