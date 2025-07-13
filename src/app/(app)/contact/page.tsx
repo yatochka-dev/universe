@@ -1,5 +1,5 @@
 "use client";
-import React, { useTransition } from "react";
+import React from "react";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -11,89 +11,55 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { Mail, MessageCircle, Instagram, Youtube, Music } from "lucide-react";
 import { submitContact } from "~/actions/contact";
 import { useAction } from "next-safe-action/hooks";
-import { type AnyFieldApi, useForm } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { Label } from "~/components/ui/label";
-import { cn } from "~/lib/utils";
 import { inquiryTypes } from "~/collections/Contact";
 import { useAnimate } from "motion/react";
-import Checkmark from "~/components/ui/checkmark";
-
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-  const isError = field.state.meta.errors.length > 0;
-
-  return (
-    <span className={cn("opacity-0", isError && "text-red-500 opacity-100")}>
-      {field.state.meta.isTouched && !field.state.meta.isValid ? (
-        <em>{field.state.meta.errors.join(",")}</em>
-      ) : (
-        "uhm, hello, why are looking here???"
-      )}
-      {field.state.meta.isValidating ? "Validating..." : null}
-    </span>
-  );
-}
-
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import {
+  resetAnimation,
+  runSubmitAnimation,
+} from "~/app/(app)/contact/animations";
+import { FaqSection } from "~/app/(app)/contact/faq-section";
+import { Checkmark } from "~/app/(app)/contact/checkmark";
+import { FieldInfo } from "~/components/field-info";
+import { emailRegex } from "~/lib/utils";
+import { DirectContact } from "~/app/(app)/contact/direct-contact";
+import { Socials } from "~/app/(app)/contact/socials";
+import { QuickResponse } from "~/app/(app)/contact/quick-response";
 
 export default function ContactPage() {
   const { executeAsync: dispatch } = useAction(submitContact);
-  const [isPending, startTransition] = useTransition();
   const [scope, animate] = useAnimate();
-  const checkmarkRef = React.useRef<typeof Checkmark>(null);
+  const [message, setMessage] = React.useState("");
 
   const form = useForm({
     defaultValues: {
-      name: "philip",
-      email: "philip@me.com",
+      name: "",
+      email: "",
       inquiryType: "general",
-      message: "awdawd",
+      message: "",
     },
     onSubmit: async ({ value: values }) => {
-      startTransition(async () => {
-        // await dispatch(values);
-        form.reset();
+      const result = await dispatch(values);
+      if (result.data) {
+        setMessage(`Your request (#${result.data.id}) has been submitted.`);
+      }
+      if (result.validationErrors) {
+        return {
+          form: result.validationErrors.formErrors,
+          fields: result.validationErrors.fieldErrors,
+        };
+      }
+      if (result.serverError) {
+        return {
+          form: ["Something went wrong, please try again later."],
+        };
+      }
 
-        animate(".field-parent", {
-          opacity: 0,
-          y: 20,
-          transitionDelay: 0.1,
-          transitionDuration: 0.3,
-          transitionTimingFunction: "ease-in-out",
-        });
-        animate("button", {
-          opacity: 0,
-          y: 20,
-          transitionDelay: 0.1,
-          transitionDuration: 0.3,
-          transitionTimingFunction: "ease-in-out",
-        });
-        animate("h2", {
-          opacity: 0,
-          y: 20,
-          transitionDelay: 0.1,
-          transitionDuration: 0.3,
-          transitionTimingFunction: "ease-in-out",
-        });
-
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        // if (checkmarkRef.current) {
-        animate([
-          [
-            ".tick",
-            { strokeDashoffset: 0 },
-            { duration: 0.45, easing: "ease-out" },
-          ],
-          [
-            ".circle",
-            { strokeDashoffset: 0 },
-            { duration: 0.65, easing: "ease-out", delay: 0.45 },
-          ],
-        ]);
-        // }
-      });
+      await runSubmitAnimation(animate);
+      form.reset();
     },
   });
 
@@ -114,13 +80,21 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div
-            className="border-border rounded-lg border p-8 shadow-sm"
+            className="border-border relative rounded-lg border p-8 shadow-sm"
             ref={scope}
           >
             <h2 className="text-foreground mb-6 text-2xl font-bold">
               Send us a message
             </h2>
-            <Checkmark ref={checkmarkRef} />
+            {!!message && (
+              <Checkmark
+                message={message}
+                onReset={async () => {
+                  await resetAnimation(animate);
+                  setMessage("");
+                }}
+              />
+            )}
             <form
               className="space-y-6"
               onSubmit={async (e) => {
@@ -281,7 +255,7 @@ export default function ContactPage() {
 
               <Button
                 type="submit"
-                className="w-full bg-red-600 text-white hover:bg-red-700"
+                className="w-full cursor-pointer bg-red-600 text-white hover:bg-red-700"
               >
                 Send Message
               </Button>
@@ -290,127 +264,16 @@ export default function ContactPage() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="border-border rounded-lg border p-8 shadow-sm">
-              <h3 className="text-muted-foreground mb-4 text-xl font-semibold">
-                Direct Contact
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Mail className="mr-3 h-5 w-5 text-red-600" />
-                  <div>
-                    <p className="text-muted-foreground font-medium">Email</p>
-                    <p className="text-gray-600">hello@universe.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <MessageCircle className="mr-3 h-5 w-5 text-red-600" />
-                  <div>
-                    <p className="text-muted-foreground font-medium">Discord</p>
-                    <p className="text-gray-600">
-                      Join our community for instant support
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DirectContact />
 
-            <div className="border-border rounded-lg border p-8 shadow-sm">
-              <h3 className="text-muted-foreground mb-4 text-xl font-semibold">
-                Follow Us
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <Button
-                  variant="outline"
-                  className="justify-start bg-transparent"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Discord
-                </Button>
-                <Button
-                  variant="outline"
-                  className="justify-start bg-transparent"
-                >
-                  <Instagram className="mr-2 h-4 w-4" />
-                  Instagram
-                </Button>
-                <Button
-                  variant="outline"
-                  className="justify-start bg-transparent"
-                >
-                  <Music className="mr-2 h-4 w-4" />
-                  TikTok
-                </Button>
-                <Button
-                  variant="outline"
-                  className="justify-start bg-transparent"
-                >
-                  <Youtube className="mr-2 h-4 w-4" />
-                  YouTube
-                </Button>
-              </div>
-            </div>
+            <Socials />
 
-            <div className="border-border rounded-lg border p-8">
-              <h3 className="text-muted-foreground mb-4 text-xl font-semibold">
-                Quick Response
-              </h3>
-              <p className="mb-4 text-gray-600">
-                For the fastest response, join our Discord community where our
-                team and community members are active daily.
-              </p>
-              <Button className="bg-red-600 text-white hover:bg-red-700">
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Join Discord Now
-              </Button>
-            </div>
+            <QuickResponse />
           </div>
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-16">
-          <h2 className="text-muted-foreground mb-8 text-center text-3xl font-bold">
-            Frequently Asked Questions
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="border-border rounded-lg border p-6 shadow-sm">
-              <h3 className="text-foreground mb-2 font-semibold">
-                How do I join UniVerse?
-              </h3>
-              <p className="text-muted-foreground">
-                Simply click the &#34;Join Discord&#34; button and follow the
-                onboarding process. Membership is free for all students!
-              </p>
-            </div>
-            <div className="border-border rounded-lg border p-6 shadow-sm">
-              <h3 className="text-foreground mb-2 font-semibold">
-                Are events free to attend?
-              </h3>
-              <p className="text-muted-foreground">
-                Yes! All our events, workshops, and hackathons are completely
-                free for UniVerse community members.
-              </p>
-            </div>
-            <div className="border-border rounded-lg border p-6 shadow-sm">
-              <h3 className="text-foreground mb-2 font-semibold">
-                Can I host an event or workshop?
-              </h3>
-              <p className="text-muted-foreground">
-                We encourage community members to share their expertise. Contact
-                us to discuss your event idea.
-              </p>
-            </div>
-            <div className="border-border rounded-lg border p-6 shadow-sm">
-              <h3 className="text-foreground mb-2 font-semibold">
-                Do you offer mentorship programs?
-              </h3>
-              <p className="text-muted-foreground">
-                Yes, we connect students with mentors in their field of
-                interest. Join our Discord to learn more about our mentorship
-                opportunities.
-              </p>
-            </div>
-          </div>
-        </div>
+        <FaqSection />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { action } from "~/lib/safe-action";
 import payloadClient from "~/data-access";
 import { inquiryTypes } from "~/collections/Contact";
+import { flattenValidationErrors } from "next-safe-action";
 
 const schema = z.object({
   name: z.string().min(1),
@@ -15,7 +16,9 @@ const schema = z.object({
 });
 
 export const submitContact = action
-  .inputSchema(schema)
+  .inputSchema(schema, {
+    handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve),
+  })
   .action(async ({ parsedInput }) => {
     const payload = await payloadClient();
 
