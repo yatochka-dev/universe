@@ -155,6 +155,7 @@ export interface Contact {
   id: number;
   name: string;
   email: string;
+  inquiryType?: ('general' | 'partnership' | 'speaking' | 'sponsor' | 'join-team' | 'media') | null;
   message: string;
   updatedAt: string;
   createdAt: string;
@@ -337,6 +338,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface ContactsSelect<T extends boolean = true> {
   name?: T;
   email?: T;
+  inquiryType?: T;
   message?: T;
   updatedAt?: T;
   createdAt?: T;

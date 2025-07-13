@@ -1,5 +1,14 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Option } from "payload";
 import sendDiscordWebhook from "~/lib/discordWebhook";
+
+export const inquiryTypes = [
+  { value: "general", label: "General Inquiry" },
+  { value: "partnership", label: "Partnership" },
+  { value: "speaking", label: "Speaking Opportunity" },
+  { value: "sponsor", label: "Sponsorship" },
+  { value: "join-team", label: "Join the Team" },
+  { value: "media", label: "Media & Press" },
+] as const;
 
 export const Contacts: CollectionConfig = {
   slug: "contacts",
@@ -16,6 +25,11 @@ export const Contacts: CollectionConfig = {
       name: "email",
       type: "email",
       required: true,
+    },
+    {
+      name: "inquiryType",
+      type: "select",
+      options: inquiryTypes as unknown as Option[],
     },
     {
       name: "message",
