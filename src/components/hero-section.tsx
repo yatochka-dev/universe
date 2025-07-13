@@ -8,6 +8,7 @@ import getSettings from "~/data-access/settings";
 import Link from "next/link";
 import FloatingBlobs from "./floating-blobs";
 import HeroCenter from "./hero-center";
+import BackgroundPattern from "~/components/bg-pattern";
 
 function convertTextToJSX(
   text: string,
@@ -41,28 +42,8 @@ export default async function Hero({ d }: { d: boolean }) {
   const settings = await getSettings();
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-gradient-to-br from-[#000] via-[#111112] to-red-900 text-white">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.3),transparent_50%)]"></div>
-        <div className="absolute top-0 left-0 h-full w-full">
-          <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern
-                id="dots"
-                x="0"
-                y="0"
-                width="60"
-                height="60"
-                patternUnits="userSpaceOnUse"
-              >
-                <circle cx="30" cy="30" r="1" fill="rgba(255,255,255,0.05)" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-        </div>
-      </div>
+    <section className="relative flex min-h-screen items-center overflow-hidden">
+      <BackgroundPattern />
 
       {/* Animated Floating Blobs (client) */}
       <FloatingBlobs />

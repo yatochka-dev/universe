@@ -3,7 +3,9 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from "~/app/(app)/providers";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
+import BackgroundPattern from "~/components/bg-pattern";
+import FloatingBlobs from "~/components/floating-blobs";
 
 export const metadata: Metadata = {
   title: "MindBridge",
@@ -12,21 +14,19 @@ export const metadata: Metadata = {
   },
 };
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <Suspense>
-      <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
-        <body>
+      <div className={"universe-background"}>
+        <BackgroundPattern />
+        <FloatingBlobs />
+
+        <main className={"z-10"}>
           <Providers>{children}</Providers>
-        </body>
-      </html>
+        </main>
+      </div>
     </Suspense>
   );
 }

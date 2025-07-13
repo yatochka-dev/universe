@@ -123,4 +123,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  .universe-background {
+    @apply bg-gradient-to-br from-[#000] via-[#111112] to-red-900 text-white;
+  }
 }
