@@ -12,7 +12,7 @@ export function FieldInfo({ field }: { field: AnyFieldApi }) {
       ) : (
         "uhm, hello, why are looking here???"
       )}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? "Validating..." : <></>}
     </span>
   );
 }
