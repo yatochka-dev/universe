@@ -8,6 +8,14 @@ export const GSettings: GlobalConfig = {
       type: "text",
       label: "Discord Community URL",
       required: true,
+      defaultValue: "https://example.com",
+    },
+    {
+      name: "discord_contact_notification_webhook_url",
+      type: "text",
+      label: "Discord Contact Notification Webhook URL",
+      required: true,
+      defaultValue: "https://example.com",
     },
   ],
 };
