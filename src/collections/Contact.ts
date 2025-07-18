@@ -13,6 +13,15 @@ export const inquiryTypes = [
     { value: "media", label: "Media & Press" },
 ] as const;
 
+export const inquiryTypes = [
+  { value: "general", label: "General Inquiry" },
+  { value: "partnership", label: "Partnership" },
+  { value: "speaking", label: "Speaking Opportunity" },
+  { value: "sponsor", label: "Sponsorship" },
+  { value: "join-team", label: "Join the Team" },
+  { value: "media", label: "Media & Press" },
+] as const;
+
 export const Contacts: CollectionConfig = {
     slug: "contacts",
     admin: {
