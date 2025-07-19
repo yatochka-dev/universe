@@ -155,7 +155,7 @@ export interface Contact {
   id: number;
   name: string;
   email: string;
-  inquiryType?: ('general' | 'partnership' | 'speaking' | 'sponsor' | 'join-team' | 'media') | null;
+  inquiryType: 'general' | 'partnership' | 'speaking' | 'sponsor' | 'join-team' | 'media';
   message: string;
   updatedAt: string;
   createdAt: string;
@@ -413,6 +413,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Setting {
   id: number;
   discord_community_url: string;
+  discord_contact_notification_webhook_url: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -461,6 +462,7 @@ export interface HeroSection {
  */
 export interface SettingsSelect<T extends boolean = true> {
   discord_community_url?: T;
+  discord_contact_notification_webhook_url?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
