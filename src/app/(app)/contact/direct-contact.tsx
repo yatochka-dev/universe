@@ -1,7 +1,9 @@
 import { Mail, MessageCircle } from "lucide-react";
 import React from "react";
+import getSettings from "~/data-access/settings";
 
-export const DirectContact = () => {
+export const DirectContact = async () => {
+  const settings = await getSettings();
   return (
     <div className="border-border rounded-lg border p-8 shadow-sm">
       <h3 className="text-muted-foreground mb-4 text-xl font-semibold">
@@ -12,7 +14,7 @@ export const DirectContact = () => {
           <Mail className="mr-3 h-5 w-5 text-red-600" />
           <div>
             <p className="text-muted-foreground font-medium">Email</p>
-            <p className="text-gray-600">hello@universe.com</p>
+            <p className="text-gray-600">{settings.direct_contact.email}</p>
           </div>
         </div>
         <div className="flex items-center">

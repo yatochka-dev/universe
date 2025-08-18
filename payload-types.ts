@@ -89,10 +89,12 @@ export interface Config {
   globals: {
     settings: Setting;
     'hero-section': HeroSection;
+    'contact-page': ContactPage;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
     'hero-section': HeroSectionSelect<false> | HeroSectionSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -155,7 +157,7 @@ export interface Contact {
   id: number;
   name: string;
   email: string;
-  inquiryType: 'general' | 'partnership' | 'speaking' | 'sponsor' | 'join-team' | 'media';
+  inquiryType?: ('general' | 'partnership' | 'speaking' | 'sponsor' | 'join-team' | 'media') | null;
   message: string;
   updatedAt: string;
   createdAt: string;
@@ -414,6 +416,9 @@ export interface Setting {
   id: number;
   discord_community_url: string;
   discord_contact_notification_webhook_url: string;
+  direct_contact: {
+    email: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -423,9 +428,13 @@ export interface Setting {
  */
 export interface HeroSection {
   id: number;
+  /**
+   * Pick a Lucide icon (stored as its name)
+   */
+  icon?: string | null;
   topBadge: {
-    emoji: string;
-    text: string;
+    Icon: string;
+    link: string;
   };
   main: {
     title: string;
@@ -458,11 +467,50 @@ export interface HeroSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page".
+ */
+export interface ContactPage {
+  id: number;
+  title: string;
+  subtitle: string;
+  socials?:
+    | {
+        show: boolean;
+        name: string;
+        /**
+         * Pick a Lucide Icon (https://lucide.dev/icons/), stored as its name
+         */
+        icon: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
+  faq: {
+    show: boolean;
+    questions?:
+      | {
+          question?: string | null;
+          answer?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
   discord_community_url?: T;
   discord_contact_notification_webhook_url?: T;
+  direct_contact?:
+    | T
+    | {
+        email?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -472,11 +520,12 @@ export interface SettingsSelect<T extends boolean = true> {
  * via the `definition` "hero-section_select".
  */
 export interface HeroSectionSelect<T extends boolean = true> {
+  icon?: T;
   topBadge?:
     | T
     | {
-        emoji?: T;
-        text?: T;
+        Icon?: T;
+        link?: T;
       };
   main?:
     | T
@@ -507,13 +556,46 @@ export interface HeroSectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  socials?:
+    | T
+    | {
+        show?: T;
+        name?: T;
+        icon?: T;
+        link?: T;
+        id?: T;
+      };
+  faq?:
+    | T
+    | {
+        show?: T;
+        questions?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    global?: 'hero-section' | null;
+    global?: ('hero-section' | 'contact-page') | null;
     user?: (number | null) | User;
   };
   output?: unknown;

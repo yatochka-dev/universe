@@ -7,6 +7,7 @@ import { Contacts } from "~/collections/Contact";
 import { GHeroSection } from "~/globals/hero";
 import { GSettings } from "~/globals/settings";
 import { env } from "./env";
+import { GContactPage } from "~/globals/contact";
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -14,13 +15,12 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     livePreview: {
-      url: `${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/lp/`,
-      globals: ["hero-section"],
+      globals: ["hero-section", "contact-page"],
     },
   },
   // Define and configure your collections in this array
   collections: [Users, Contacts],
-  globals: [GSettings, GHeroSection],
+  globals: [GSettings, GHeroSection, GContactPage],
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET ?? "",

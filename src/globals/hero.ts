@@ -2,10 +2,15 @@
 import type { GlobalConfig } from "payload";
 import { revalidateTag } from "next/cache";
 import { asterixValidator } from "../lib/asterixValidator";
+import { env } from "~/env";
 
 export const GHeroSection: GlobalConfig = {
   slug: "hero-section",
-  admin: {},
+  admin: {
+    livePreview: {
+      url: `${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/lp/`,
+    },
+  },
   versions: {
     drafts: {
       autosave: {
@@ -19,21 +24,35 @@ export const GHeroSection: GlobalConfig = {
   },
   fields: [
     {
+      name: "icon",
+      type: "text", // we store the Lucide icon name
+      admin: {
+        description: "Pick a Lucide icon (stored as its name)",
+        components: {
+          Field: {
+            path: "/src/fields/IconPicker", // or relative to admin.importMap.baseDir
+            exportName: "default",
+            clientProps: {
+              // optional: restrict to a curated subset
+              // allow: ['User', 'Mail', 'Calendar'] as const
+            },
+          },
+        },
+      },
+    },
+    {
       name: "topBadge",
       type: "group",
       label: "Top Badge",
       fields: [
         {
-          name: "emoji",
+          name: "Icon",
           type: "text",
-          minLength: 1,
-          maxLength: 2,
 
           required: true,
-          defaultValue: "🚀",
         },
         {
-          name: "text",
+          name: "link",
           type: "text",
           required: true,
           defaultValue: "Join 1,100+ innovators worldwide",

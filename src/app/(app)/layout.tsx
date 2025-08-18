@@ -6,6 +6,9 @@ import { Providers } from "~/app/(app)/providers";
 import React, { Suspense } from "react";
 import BackgroundPattern from "~/components/bg-pattern";
 import FloatingBlobs from "~/components/floating-blobs";
+import { Header } from "~/app/(app)/header";
+import getSettings from "~/data-access/settings";
+import { Footer } from "~/app/(app)/footer";
 
 export const metadata: Metadata = {
   title: "MindBridge",
@@ -14,19 +17,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <Suspense>
-      <div className={"universe-background"}>
-        <BackgroundPattern />
-        <FloatingBlobs />
+  const settings = await getSettings();
 
-        <main className={"z-10"}>
-          <Providers>{children}</Providers>
-        </main>
-      </div>
-    </Suspense>
+  return (
+    <html lang="en">
+      <body>
+        <Suspense>
+          <Header {...settings} />
+          <div className={"universe-background"}>
+            <BackgroundPattern />
+            <FloatingBlobs />
+
+            <main className={"z-10"}>
+              <Providers>{children}</Providers>
+            </main>
+          </div>
+          <Footer {...settings} />
+        </Suspense>
+      </body>
+    </html>
   );
 }

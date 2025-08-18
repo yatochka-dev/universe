@@ -17,5 +17,18 @@ export const GSettings: GlobalConfig = {
       required: true,
       defaultValue: "https://example.com",
     },
+    {
+      type: "group",
+      name: "direct_contact",
+      label: "Direct Contact",
+      fields: [
+        {
+          type: "text",
+          name: "email",
+          label: "Email",
+          required: true,
+        },
+      ],
+    },
   ],
 };

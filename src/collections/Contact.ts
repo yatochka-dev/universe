@@ -33,7 +33,7 @@ export const Contacts: CollectionConfig = {
       name: "inquiryType",
       type: "select",
       options: inquiryTypes as unknown as Option[],
-      required: true,
+      required: false,
     },
     {
       name: "message",
