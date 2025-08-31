@@ -1,36 +1,15 @@
 import Link from "next/link";
 import { MessageCircle, Instagram, Youtube, Music, Heart } from "lucide-react";
 import type { Setting } from "../../../payload-types";
+import { navItems } from "~/lib/nav";
+import getSettings from "~/data-access/settings";
+import { DynamicIcon, type IconName } from "~/app/(app)/contact/socials";
 
-export function Footer(props: Setting) {
-  const quickLinks = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
-    { name: "Events", href: "/events" },
-    { name: "Resources", href: "/resources" },
-    { name: "Community", href: "/community" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const socialLinks = [
-    {
-      icon: MessageCircle,
-      href: "#",
-      label: "Discord",
-      color: "hover:text-indigo-400",
-    },
-    {
-      icon: Instagram,
-      href: "#",
-      label: "Instagram",
-      color: "hover:text-pink-400",
-    },
-    { icon: Music, href: "#", label: "TikTok", color: "hover:text-gray-300" },
-    { icon: Youtube, href: "#", label: "YouTube", color: "hover:text-red-400" },
-  ];
+export async function Footer(props: Setting) {
+  const settings = await getSettings();
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <footer className="text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="col-span-1 md:col-span-2">
@@ -44,16 +23,18 @@ export function Footer(props: Setting) {
               through hands-on learning and global collaboration.
             </p>
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <Link
-                  key={index}
-                  href={social.href}
-                  className={`text-gray-400 ${social.color} transform rounded-xl p-3 transition-all duration-300 hover:scale-110 hover:bg-white/5`}
-                >
-                  <social.icon className="h-6 w-6" />
-                  <span className="sr-only">{social.label}</span>
-                </Link>
-              ))}
+              {!!settings &&
+                !!settings.socials &&
+                settings.socials.map((social, index) => (
+                  <Link
+                    key={index}
+                    href={social.link}
+                    className={`transform rounded-xl p-3 text-gray-400 transition-all duration-300 hover:scale-110 hover:bg-white/5`}
+                  >
+                    <DynamicIcon name={social.icon as IconName} />
+                    <span className="sr-only">{social.name}</span>
+                  </Link>
+                ))}
             </div>
           </div>
 
@@ -62,13 +43,13 @@ export function Footer(props: Setting) {
               Quick Links
             </h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
+              {navItems.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="inline-block transform text-gray-400 transition-colors duration-300 hover:translate-x-1 hover:text-white"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -95,8 +76,7 @@ export function Footer(props: Setting) {
         <div className="mt-12 border-t border-gray-800 pt-8">
           <div className="flex flex-col items-center justify-between md:flex-row">
             <p className="mb-4 text-gray-400 md:mb-0">
-              © 2024 UniVerse. All rights reserved. | Privacy Policy | Terms of
-              Service
+              © 2025 UniVerse. All rights reserved.
             </p>
             <p className="flex items-center text-gray-400">
               Made with <Heart className="mx-1 h-4 w-4 text-red-500" /> by

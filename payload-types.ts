@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     contacts: Contact;
+    resources: Resource;
+    'resource-types': ResourceType;
+    media: Media;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
+    resources: ResourcesSelect<false> | ResourcesSelect<true>;
+    'resource-types': ResourceTypesSelect<false> | ResourceTypesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -161,6 +167,62 @@ export interface Contact {
   message: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface Resource {
+  id: number;
+  title: string;
+  type: number | ResourceType;
+  description: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resource-types".
+ */
+export interface ResourceType {
+  id: number;
+  label: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -270,6 +332,18 @@ export interface PayloadLockedDocument {
         value: number | Contact;
       } | null)
     | ({
+        relationTo: 'resources';
+        value: number | Resource;
+      } | null)
+    | ({
+        relationTo: 'resource-types';
+        value: number | ResourceType;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
         relationTo: 'payload-jobs';
         value: number | PayloadJob;
       } | null);
@@ -347,6 +421,45 @@ export interface ContactsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources_select".
+ */
+export interface ResourcesSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  description?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resource-types_select".
+ */
+export interface ResourceTypesSelect<T extends boolean = true> {
+  label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs_select".
  */
 export interface PayloadJobsSelect<T extends boolean = true> {
@@ -419,6 +532,18 @@ export interface Setting {
   direct_contact: {
     email: string;
   };
+  socials?:
+    | {
+        show: boolean;
+        name: string;
+        /**
+         * Pick a Lucide Icon (https://lucide.dev/icons/), stored as its name
+         */
+        icon: string;
+        link: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -433,8 +558,8 @@ export interface HeroSection {
    */
   icon?: string | null;
   topBadge: {
-    Icon: string;
-    link: string;
+    emoji: string;
+    text: string;
   };
   main: {
     title: string;
@@ -473,18 +598,6 @@ export interface ContactPage {
   id: number;
   title: string;
   subtitle: string;
-  socials?:
-    | {
-        show: boolean;
-        name: string;
-        /**
-         * Pick a Lucide Icon (https://lucide.dev/icons/), stored as its name
-         */
-        icon: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   faq: {
     show: boolean;
     questions?:
@@ -511,6 +624,15 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         email?: T;
       };
+  socials?:
+    | T
+    | {
+        show?: T;
+        name?: T;
+        icon?: T;
+        link?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -524,8 +646,8 @@ export interface HeroSectionSelect<T extends boolean = true> {
   topBadge?:
     | T
     | {
-        Icon?: T;
-        link?: T;
+        emoji?: T;
+        text?: T;
       };
   main?:
     | T
@@ -561,15 +683,6 @@ export interface HeroSectionSelect<T extends boolean = true> {
 export interface ContactPageSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
-  socials?:
-    | T
-    | {
-        show?: T;
-        name?: T;
-        icon?: T;
-        link?: T;
-        id?: T;
-      };
   faq?:
     | T
     | {

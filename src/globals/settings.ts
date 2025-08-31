@@ -30,5 +30,44 @@ export const GSettings: GlobalConfig = {
         },
       ],
     },
+    {
+      type: "array",
+      name: "socials",
+      label: "Socials",
+      fields: [
+        {
+          type: "checkbox",
+          name: "show",
+          label: "Show Social",
+          defaultValue: true,
+          required: true,
+        },
+        {
+          type: "text",
+          name: "name",
+          label: "Name",
+          defaultValue: "Twitter",
+          required: true,
+        },
+
+        {
+          name: "icon",
+          type: "text", // we store the Lucide icon name
+          required: true,
+          defaultValue: "MessageCircle",
+          admin: {
+            description:
+              "Pick a Lucide Icon (https://lucide.dev/icons/), stored as its name",
+          },
+        },
+        {
+          type: "text",
+          name: "link",
+          label: "Link",
+          defaultValue: "https://example.com",
+          required: true,
+        },
+      ],
+    },
   ],
 };

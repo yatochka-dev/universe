@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import type { Setting } from "../../../payload-types";
+import { navItems } from "~/lib/nav";
 
 export function Header(props: Setting) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,15 +18,6 @@ export function Header(props: Setting) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navigation = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Events", href: "/events" },
-    { name: "Resources", href: "/resources" },
-    { name: "Community", href: "/community" },
-    { name: "Contact", href: "/contact" },
-  ];
 
   return (
     <header
@@ -51,9 +43,9 @@ export function Header(props: Setting) {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navigation.map((item) => (
+              {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.label}
                   href={item.href}
                   className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isScrolled
@@ -61,7 +53,7 @@ export function Header(props: Setting) {
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               ))}
             </div>
@@ -103,14 +95,14 @@ export function Header(props: Setting) {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="mt-2 space-y-1 rounded-2xl border border-gray-200/50 bg-white/95 px-2 pt-2 pb-3 shadow-xl backdrop-blur-md sm:px-3">
-              {navigation.map((item) => (
+              {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.label}
                   href={item.href}
                   className="block rounded-xl px-4 py-3 text-base font-medium text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               ))}
               <div className="px-4 py-3">

@@ -46,13 +46,13 @@ export const GHeroSection: GlobalConfig = {
       label: "Top Badge",
       fields: [
         {
-          name: "Icon",
+          name: "emoji",
           type: "text",
 
           required: true,
         },
         {
-          name: "link",
+          name: "text",
           type: "text",
           required: true,
           defaultValue: "Join 1,100+ innovators worldwide",

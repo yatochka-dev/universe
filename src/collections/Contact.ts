@@ -68,7 +68,7 @@ export const Contacts: CollectionConfig = {
                 },
                 {
                   name: "Inquiry Type",
-                  value: obj.inquiryType,
+                  value: obj.inquiryType ?? "N/A",
                   inline: true,
                 },
                 {

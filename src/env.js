@@ -13,6 +13,10 @@ export const env = createEnv({
       const dt = JSON.parse(v);
       return z.string().email().array().parse(dt);
     }),
+    R2_URL: z.string().url(),
+    R2_ACCESS_KEY_ID: z.string(),
+    R2_SECRET_ACCESS_KEY: z.string(),
+    R2_BUCKET: z.string(),
   },
 
   /**
@@ -41,6 +45,11 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
     SUDO_USERS: process.env.SUDO_USERS,
+
+    R2_URL: process.env.R2_URL,
+    R2_ACCESS_KEY_ID: process.env.R2_ACCESS_KEY_ID,
+    R2_SECRET_ACCESS_KEY: process.env.R2_SECRET_ACCESS_KEY,
+    R2_BUCKET: process.env.R2_BUCKET,
 
     NEXT_PUBLIC_BACKEND_URI: process.env.NEXT_PUBLIC_BACKEND_URI,
     NEXT_PUBLIC_VERCEL_BRANCH_URL: process.env.VERCEL_URL,

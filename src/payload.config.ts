@@ -1,5 +1,4 @@
 import sharp from "sharp";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { buildConfig } from "payload";
 import { Users } from "~/collections/User";
@@ -8,18 +7,39 @@ import { GHeroSection } from "~/globals/hero";
 import { GSettings } from "~/globals/settings";
 import { env } from "./env";
 import { GContactPage } from "~/globals/contact";
+import Resources from "~/collections/Resource";
+import { editor } from "~/editor";
+import { Media } from "~/collections/Media";
+import { s3Storage } from "@payloadcms/storage-s3";
+import ResourceTypes from "~/collections/ResourceType";
+
+const r2 = s3Storage({
+  collections: {
+    media: true,
+  },
+  config: {
+    credentials: {
+      accessKeyId: env.R2_ACCESS_KEY_ID,
+      secretAccessKey: env.R2_SECRET_ACCESS_KEY,
+    },
+    endpoint: env.R2_URL,
+    region: "auto",
+  },
+  bucket: env.R2_BUCKET,
+});
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
-  editor: lexicalEditor(),
+  editor: editor,
   admin: {
     user: Users.slug,
     livePreview: {
       globals: ["hero-section", "contact-page"],
     },
   },
+  plugins: [r2],
   // Define and configure your collections in this array
-  collections: [Users, Contacts],
+  collections: [Users, Contacts, Resources, ResourceTypes, Media],
   globals: [GSettings, GHeroSection, GContactPage],
 
   // Your Payload secret - should be a complex and secure string, unguessable

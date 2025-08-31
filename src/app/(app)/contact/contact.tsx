@@ -34,7 +34,7 @@ export default function Contact({ contact }: ContactProps) {
           <div className="space-y-8">
             <DirectContact />
 
-            <Socials socials={contact.socials} />
+            <Socials />
 
             <QuickResponse />
           </div>
