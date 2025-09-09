@@ -41,10 +41,10 @@ export function WhatWeDo() {
               What We Offer
             </span>
           </div>
-          <h2 className="mb-6 text-4xl font-bold text-gray-900 md:text-6xl">
+          <h2 className="mb-6 text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent md:text-6xl">
             What We <span className="text-red-600">Do</span>
           </h2>
-          <p className="mx-auto max-w-4xl text-xl leading-relaxed text-gray-600">
+          <p className="mx-auto max-w-4xl text-xl leading-relaxed text-white/90">
             UniVerse is a student-led platform dedicated to helping students
             take ideas from
             <span className="font-semibold text-red-600">

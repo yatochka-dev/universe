@@ -37,13 +37,13 @@ export function WhyJoin() {
               Why Choose Us
             </span>
           </div>
-          <h2 className="mb-6 text-4xl font-bold text-gray-900 md:text-6xl">
+          <h2 className="mb-6 text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent md:text-6xl">
             Why Join{" "}
             <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
               UniVerse?
             </span>
           </h2>
-          <p className="mb-12 text-2xl font-light text-gray-600">
+          <p className="mb-12 text-2xl font-light text-white/90">
             Learn, Build, Launch Ideas that{" "}
             <span className="font-semibold text-red-600">Matter</span>
           </p>
@@ -74,17 +74,17 @@ export function WhyJoin() {
         </div>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          {benefits.map((benefit, index) => (
+          {benefits.map((benefit, index) =>   (
             <div key={index} className="group text-center">
               <div
                 className={`h-24 w-24 ${benefit.bg} mx-auto mb-8 flex transform items-center justify-center rounded-3xl shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl`}
               >
                 <benefit.icon className={`h-12 w-12 ${benefit.color}`} />
               </div>
-              <h3 className="mb-6 text-2xl font-bold text-gray-900 transition-colors group-hover:text-gray-800">
+              <h3 className="mb-6 text-2xl font-bold text-white/70 transition-colors group-hover:text-white/90">
                 {benefit.title}
               </h3>
-              <p className="text-lg leading-relaxed text-gray-600 transition-colors group-hover:text-gray-700">
+              <p className="text-lg leading-relaxed text-white/80 transition-colors group-hover:text-gray-700">
                 {benefit.description}
               </p>
             </div>
