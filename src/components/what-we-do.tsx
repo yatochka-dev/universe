@@ -33,7 +33,7 @@ const offerings = [
 
 export function WhatWeDo() {
   return (
-    <section className="bg-gray-50 py-32">
+    <section className="py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-20 text-center">
           <div className="mb-6">
